@@ -1,0 +1,162 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 100,
+      "title": "Channel Overview & High-Level KPIs",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 1 },
+      "id": 1,
+      "title": "Subscribers",
+      "type": "stat",
+      "targets": [
+        {
+          "rawSql": "SELECT subscriber_count FROM channels ORDER BY updated_at DESC LIMIT 1;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 1 },
+      "id": 2,
+      "title": "Total Channel Uploads",
+      "type": "stat",
+      "targets": [
+        {
+          "rawSql": "SELECT video_count FROM channels ORDER BY updated_at DESC LIMIT 1;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 1 },
+      "id": 3,
+      "title": "Shorts Count (<=60s)",
+      "type": "stat",
+      "targets": [
+        {
+          "rawSql": "SELECT count(*) FROM youtube_videos WHERE is_short = 1;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 4, "w": 4, "x": 12, "y": 1 },
+      "id": 4,
+      "title": "Regular Videos (>60s)",
+      "type": "stat",
+      "targets": [
+        {
+          "rawSql": "SELECT count(*) FROM youtube_videos WHERE is_short = 0;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 1 },
+      "id": 5,
+      "title": "Total Views (Analyzed)",
+      "type": "stat",
+      "targets": [
+        {
+          "rawSql": "SELECT sum(view_count) FROM youtube_videos;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 1 },
+      "id": 6,
+      "title": "Avg Duration (sec)",
+      "type": "stat",
+      "targets": [
+        {
+          "rawSql": "SELECT avg(duration_seconds) FROM youtube_videos;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 5 },
+      "id": 101,
+      "title": "Top 10 Most Viewed Videos",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 6 },
+      "id": 7,
+      "title": "Top 10 Videos by View Count",
+      "type": "table",
+      "targets": [
+        {
+          "rawSql": "SELECT title, duration_formatted AS duration, view_count AS views, like_count AS likes, comment_count AS comments, published_at, url FROM youtube_videos ORDER BY view_count DESC LIMIT 10;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 14 },
+      "id": 102,
+      "title": "Top 10 Longest Videos & Duration Breakdown",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 15 },
+      "id": 8,
+      "title": "Top 10 Longest Videos",
+      "type": "table",
+      "targets": [
+        {
+          "rawSql": "SELECT title, duration_formatted AS duration, view_count AS views, url FROM youtube_videos ORDER BY duration_seconds DESC LIMIT 10;",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "sqlite", "uid": "sqlite-osint" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 15 },
+      "id": 9,
+      "title": "Top 10 Most Viewed Shorts",
+      "type": "table",
+      "targets": [
+        {
+          "rawSql": "SELECT title, duration_formatted AS duration, view_count AS views, url FROM youtube_videos WHERE is_short = 1 ORDER BY view_count DESC LIMIT 10;",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["osint", "youtube", "social-media"],
+  "time": {
+    "from": "now-1y",
+    "to": "now"
+  },
+  "title": "YouTube Channel OSINT & Analysis Dashboard",
+  "uid": "youtube-osint-v1",
+  "version": 1
+}

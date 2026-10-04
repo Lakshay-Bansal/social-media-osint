@@ -1,0 +1,23 @@
+# Social Media OSINT Toolkit Dependencies
+# Core YouTube Data API Client
+google-api-python-client>=2.110.0
+isodate>=0.6.1
+
+# YouTube Scraping & Fallback Extractor (works even without API key)
+yt-dlp>=2024.5.27
+
+# Instagram OSINT Client
+instaloader>=4.11.0
+
+# Data Processing & Analysis
+pandas>=2.2.0
+python-dateutil>=2.9.0
+
+# CLI and Visualization
+rich>=13.7.0
+plotly>=5.20.0
+streamlit>=1.32.0
+
+# Configuration & Environment
+python-dotenv>=1.0.1
+requests>=2.31.0
